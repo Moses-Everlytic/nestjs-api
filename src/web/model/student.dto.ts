@@ -1,5 +1,12 @@
 export class StudentDTO {
   name: string;
-  surname: string;
-  studentId: number;
+  teacher: string;
+  studentNumber: number;
+}
+
+export class FindStudentDTO {
+  id: string;
+  name: string;
+  teacher: string;
+  studentNumber: number;
 }

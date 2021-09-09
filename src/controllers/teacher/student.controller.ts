@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Param, Put } from '@nestjs/common';
-import { StudentDTO } from 'src/web/model/student.dto';
+import { FindStudentDTO, StudentDTO } from 'src/web/model/student.dto';
 
 @Controller('teachers/:id/students')
 export class StudentController {
   @Get()
-  getStudents(@Param('id') id: string) {
-    return 'Get All Students for Teacher By Teacher Id: ' + id;
+  getStudents(@Param('id') id: string): FindStudentDTO[] {
+    return null;
   }
 
   @Put(':studentId')
-  updateStudentById(@Param() params, @Body() studentDTO: StudentDTO) {
-    return `teacher id: ${params.id}, student id ${params.studentId}, student: ${studentDTO}`;
+  updateStudentById(@Param() params, @Body() studentDTO: StudentDTO): void {
+    console.log('updated');
   }
 }
