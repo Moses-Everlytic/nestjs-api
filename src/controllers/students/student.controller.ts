@@ -7,34 +7,44 @@ import {
   Param,
   Post,
   Put,
+  Response,
 } from '@nestjs/common';
-import { FindStudentDTO, StudentDTO } from 'src/web/model/student.dto';
+import { StudentService } from 'src/services/student.service';
+import { StudentDTO } from 'src/web/model/student.dto';
 
 @Controller('students')
 export class StudentController {
+  constructor(private readonly studentService: StudentService) {}
+
   @Get()
-  getStudents(): FindStudentDTO[] {
-    return null;
+  async getStudents() {
+    return await this.studentService.getStudents();
   }
 
   @Get('/:id')
-  getStudentById(@Param('id') id: string): FindStudentDTO {
-    return null;
+  async getStudentById(@Param('id') id: string, @Response() res) {
+    const student = await this.studentService.getStudentById(id);
+
+    if (student === null) {
+      return res.status(404).send('Resource Not Found');
+    }
+
+    return student;
   }
 
   @Post()
   @HttpCode(201)
-  createStudent(@Body() studentDTO: StudentDTO): StudentDTO {
-    return studentDTO;
+  async createStudent(@Body() studentDTO: StudentDTO) {
+    return await this.studentService.createStudent(studentDTO);
   }
 
   @Put('/:id')
-  updateStudent(@Param('id') id: string, @Body() studentDTO: StudentDTO): void {
-    console.log(`Updated id: ${id} student: ${studentDTO}`);
+  async updateStudent(@Param('id') id: string, @Body() studentDTO: StudentDTO) {
+    await this.studentService.updateStudent(id, studentDTO);
   }
 
   @Delete('/:id')
-  deleteStudent(@Param('id') id: string): void {
-    console.log('deleting ' + id);
+  async deleteStudent(@Param('id') id: string) {
+    await this.studentService.deleteStudent(id);
   }
 }
