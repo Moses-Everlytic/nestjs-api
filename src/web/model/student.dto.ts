@@ -6,10 +6,3 @@ export class StudentDTO {
 export class CreateStudentDTO extends StudentDTO {
   studentNumber: string;
 }
-
-export class FindStudentDTO {
-  id: string;
-  name: string;
-  teacher: string;
-  studentNumber: string;
-}

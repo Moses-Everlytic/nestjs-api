@@ -8,33 +8,36 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { FindTeacherDTO, TeacherDTO } from 'src/web/model/teacher.dto';
+import { TeacherService } from 'src/services/teacher.service';
+import { TeacherDTO } from 'src/web/model/teacher.dto';
 
 @Controller('teachers')
 export class TeacherController {
+  constructor(private readonly teacherService: TeacherService) {}
+
   @Get()
-  getTeachers(): FindTeacherDTO[] {
-    return null;
+  async getTeachers() {
+    return await this.teacherService.getTeachers();
   }
 
   @Get('/:id')
-  getTeacherById(@Param('id') id: string): FindTeacherDTO {
-    return null;
+  async getTeacherById(@Param('id') id: string) {
+    return await this.teacherService.getTeacherById(id);
   }
 
   @Post()
   @HttpCode(201)
-  createTeacher(@Body() teachertDTO: TeacherDTO): TeacherDTO {
-    return teachertDTO;
+  async createTeacher(@Body() teachertDTO: TeacherDTO) {
+    return await this.teacherService.createTeacher(teachertDTO);
   }
 
   @Put('/:id')
-  updateTeacher(@Param('id') id: string, @Body() teacherDTO: TeacherDTO): void {
-    console.log(`Updated id: ${id} teacher: ${teacherDTO}`);
+  async updateTeacher(@Param('id') id: string, @Body() teacherDTO: TeacherDTO) {
+    await this.teacherService.updateTeacher(id, teacherDTO);
   }
 
   @Delete('/:id')
-  deleteTeacher(@Param('id') id: string): void {
-    console.log('deleting ' + id);
+  async deleteTeacher(@Param('id') id: string) {
+    await this.teacherService.deleteTeacher(id);
   }
 }

@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { Student, StudentDocument } from 'src/schemas/student.schema';
 import { CreateStudentDTO, StudentDTO } from 'src/web/model/student.dto';
 import { uuid } from 'uuidv4';
-import { IStudentService } from './student.interface.service';
+import { IStudentService } from './student.interface';
 
 @Injectable()
 export class StudentService implements IStudentService<Student> {
