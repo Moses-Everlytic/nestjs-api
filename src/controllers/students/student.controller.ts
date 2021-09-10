@@ -25,11 +25,13 @@ export class StudentController {
   async getStudentById(@Param('id') id: string, @Response() res) {
     const student = await this.studentService.getStudentById(id);
 
+    console.log(student);
+
     if (student === null) {
       return res.status(404).send('Resource Not Found');
     }
 
-    return student;
+    return res.json(student).end();
   }
 
   @Post()

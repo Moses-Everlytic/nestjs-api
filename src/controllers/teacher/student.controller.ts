@@ -11,7 +11,7 @@ export class StudentController {
     return await this.studentTeacherService.getTeacherStudents(id);
   }
 
-  @Put(':studentId')
+  @Put('/:studentId')
   async updateStudentById(@Param() params, @Body() studentDTO: StudentDTO) {
     await this.studentTeacherService.updateStudentByTeacherAndStudentId(
       params.id,
