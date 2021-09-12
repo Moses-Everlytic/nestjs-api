@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { StudentService } from 'src/services/student.service';
 import { StudentDTO } from 'src/web/model/student.dto';
+import * as bcrypt from 'bcrypt';
 
 @Controller('students')
 export class StudentController {
